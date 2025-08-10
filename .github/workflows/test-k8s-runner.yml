@@ -24,4 +24,4 @@ jobs:
         run: |
           echo "Finding runner version..."
           # The runner version is stored in a file named .runner
-          cat /home/runner/actions-runner/.runner
+          cat /home/runner/.runner
