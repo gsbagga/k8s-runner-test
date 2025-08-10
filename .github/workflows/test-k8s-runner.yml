@@ -9,21 +9,23 @@ jobs:
   build-on-k8s:
     name: Run on K8s and Check Version
     runs-on: self-hosted
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: 🚀 Test Runner
-        run: |
-          echo "🎉 Job is running on a self-hosted runner in Kubernetes!"
-          echo "Runner Name: $RUNNER_NAME"
-          echo "Workspace: $RUNNER_WORKSPACE"
-
       - name: 🕵️ Explore Runner Filesystem
         run: |
-          echo "--- Listing contents of /home/runner ---"
-          ls -la /home/runner
+          echo "================================================="
+          echo "||           LISTING ENVIRONMENT VARIABLES     ||"
+          echo "================================================="
+          env | sort
           
-          echo "--- Listing contents of /home/runner/actions-runner ---"
-          ls -la /home/runner/actions-runner
+          echo
+          echo "================================================="
+          echo "||          LISTING ROOT DIRECTORY (/)         ||"
+          echo "================================================="
+          ls -la /
+
+          echo
+          echo "================================================="
+          echo "||      LISTING HOME DIRECTORY (/home/runner)    ||"
+          echo "================================================="
+          # This command will not fail even if the directory doesn't exist.
+          ls -la /home/runner || echo "Directory /home/runner not found."
