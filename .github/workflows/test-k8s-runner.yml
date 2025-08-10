@@ -29,3 +29,13 @@ jobs:
           echo "================================================="
           # This command will not fail even if the directory doesn't exist.
           ls -la /home/runner || echo "Directory /home/runner not found."
+      - name: 🚀 Test Runner
+        run: |
+          echo "🎉 Job is running on a self-hosted runner in Kubernetes!"
+          echo "Runner Name: $RUNNER_NAME"
+
+      - name: 🔍 Get Runner Version
+        run: |
+          echo "Getting the runner version from the script..."
+          cd /home/runner/actions-runner
+          ./run.sh --version
