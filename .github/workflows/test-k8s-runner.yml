@@ -20,10 +20,10 @@ jobs:
           echo "Runner Name: $RUNNER_NAME"
           echo "Workspace: $RUNNER_WORKSPACE"
 
-      - name: 🔍 Ask Runner Script for its Version
+      - name: 🕵️ Explore Runner Filesystem
         run: |
-          echo "Asking the runner application for its version..."
-          # The runner's files are in /home/runner/actions-runner
-          ./bin/Runner.Listener --version
-          #cd /home/runner/actions-runner
-          #./run.sh --version
+          echo "--- Listing contents of /home/runner ---"
+          ls -la /home/runner
+          
+          echo "--- Listing contents of /home/runner/actions-runner ---"
+          ls -la /home/runner/actions-runner
