@@ -20,8 +20,9 @@ jobs:
           echo "Runner Name: $RUNNER_NAME"
           echo "Workspace: $RUNNER_WORKSPACE"
 
-      - name: 🔍 Find and Display Runner Version
+      - name: 🔍 Ask Runner Script for its Version
         run: |
-          echo "Searching for the .runner file and displaying its contents..."
-          # This command finds the file named .runner within /home/runner and executes cat on it.
-          find /home/runner -name ".runner" -exec cat {} \;
+          echo "Asking the runner application for its version..."
+          # The runner's files are in /home/runner/actions-runner
+          cd /home/runner/actions-runner
+          ./run.sh --version
