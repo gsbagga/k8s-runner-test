@@ -1,0 +1,27 @@
+name: Test Kubernetes Runner
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-on-k8s:
+    name: Run on K8s and Check Version
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🚀 Test Runner
+        run: |
+          echo "🎉 Job is running on a self-hosted runner in Kubernetes!"
+          echo "Runner Name: $RUNNER_NAME"
+          echo "Workspace: $RUNNER_WORKSPACE"
+
+      - name: 🔍 Check Runner Version
+        run: |
+          echo "Finding runner version..."
+          # The runner version is stored in a file named .runner
+          cat /home/runner/actions-runner/.runner
