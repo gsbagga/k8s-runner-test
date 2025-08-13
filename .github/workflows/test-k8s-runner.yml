@@ -10,32 +10,13 @@ jobs:
     name: Run on K8s and Check Version
     runs-on: self-hosted
     steps:
-      - name: 🕵️ Explore Runner Filesystem
-        run: |
-          echo "================================================="
-          echo "||           LISTING ENVIRONMENT VARIABLES     ||"
-          echo "================================================="
-          env | sort
-          
-          echo
-          echo "================================================="
-          echo "||          LISTING ROOT DIRECTORY (/)         ||"
-          echo "================================================="
-          ls -la /
-
-          echo
-          echo "================================================="
-          echo "||      LISTING HOME DIRECTORY (/home/runner)    ||"
-          echo "================================================="
-          # This command will not fail even if the directory doesn't exist.
-          ls -la /home/runner || echo "Directory /home/runner not found."
       - name: 🚀 Test Runner
         run: |
           echo "🎉 Job is running on a self-hosted runner in Kubernetes!"
           echo "Runner Name: $RUNNER_NAME"
 
-      - name: 🔍 Get Runner Version
+      - name: 🔍 Get Runner Version (Correct Path)
         run: |
-          echo "Getting the runner version from the script..."
-          cd /home/runner/actions-runner
+          echo "Getting the runner version from the correct directory..."
+          cd /runner
           ./run.sh --version
