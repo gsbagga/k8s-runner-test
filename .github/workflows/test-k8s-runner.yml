@@ -20,3 +20,4 @@ jobs:
           echo "Getting the runner version from the correct directory..."
           cd /runner
           ./run.sh --version
+          echo "check the version of latest runner from github" 
