@@ -15,9 +15,19 @@ jobs:
           echo "🎉 Job is running on a self-hosted runner in Kubernetes!"
           echo "Runner Name: $RUNNER_NAME"
 
-      - name: 🔍 Get Runner Version (Correct Path)
+      - name: 🔍 Get Runner Version and Compare
         run: |
           echo "Getting the runner version from the correct directory..."
           cd /runner
-          ./run.sh --version
-          echo "check the version of latest runner from github" 
+          RUNNER_VERSION=$(./run.sh --version | grep -oP '([0-9]+\.[0-9]+\.[0-9]+)')
+          echo "Local runner version: $RUNNER_VERSION"
+
+          LATEST_VERSION=$(curl -s https://api.github.com/repos/actions/runner/releases/latest | grep tag_name | grep -oP '([0-9]+\.[0-9]+\.[0-9]+)')
+          echo "Latest runner version: $LATEST_VERSION"
+
+          if [ "$RUNNER_VERSION" = "$LATEST_VERSION" ]; then
+            echo "✅ Versions match!"
+          else
+            echo "❌ Versions do not match!"
+            exit 1
+          fi
